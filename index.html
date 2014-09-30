@@ -1,0 +1,89 @@
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link id="favicon" rel="icon" href="favicon.ico">
+    
+    <!-- Bootstrap core CSS -->
+     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+     <!-- Bootstrap Javascript do MaxCDN -->
+     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+     <!-- Custom styles for this template -->
+    <link href="../bootstrap-3.2.0-dist/css/signin.css" rel="stylesheet"> <!-- Retirei do site do Bootstrap-->
+	
+	<!-- Javascript -->
+	<script src="http://code.jquery.com/jquery-latest.js"></script> <!-- Adicionar biblioteca Jquery -->
+	<script>
+		$(document).ready( function() {  // Funcao para esperar a pagina carregar todos os elementos HTML http://api.jquery.com/ready/
+		$("#login").submit( function () { // Funcao para substituir onsubmit no campo form do HTML. "#" procura elemento com o nome referido  
+			$.ajax( {// chamada ajax via jquery http://api.jquery.com/jquery.ajax/. Para POST pode substituir por $.post()
+					type: "POST", // implementar metodo POST. Pode ser 
+					url: "wp-controller/login_process.php", // URL a ser enviado o pedido
+					data: { // dados a serem enviados para a URL (pelo jeito soh aceita metodo GET)
+						username: $("#username").val(), // val() pega os dados da variavel. 
+						password: $("#password").val(),
+					}, 
+					success: function(json_data) { // estado 4 (readyState) recebido. "data" sao os dados recebidos do pedido
+							var result = $.parseJSON(json_data); // decode JSON
+							if (result.status ==true) 
+								window.location = "quote.html"; // teste se pedido deu certo
+						
+							else {
+								$("#title").css("color", "red"); 
+								$("#title").text("Usuario ou Senha errado. Tente Novamente!");
+								$("#favicon").attr("href","wp-images/favicon_error.ico");
+							}
+								
+					}
+					}); // final da chamada AJAX
+
+			return false; // Retornar falso para nao recarregar pagina
+		});
+	});
+	</script>
+	
+	
+    
+	<title> Rafael Alessi Muntsch</title></head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Site Pessoal do Rafael Alessi Muntsch</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right" role="form" id="login">
+            <div class="form-group">
+              <input id="username" type="text" placeholder="username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input id="password" type="password" placeholder="password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+    
+<!-- Conteudo do site -->	
+	<div class="container">
+	<form class="form-signin" role="form "id="form" > <!-- return false serve para nao submeter o form e recarregar outra pagina -->
+		<h2 id="title" class="form-signin-heading"> Welcome!</h2>
+		<table>
+		<input id="username" type="username" class="form-control" placeholder="username" name="username" required autofocus>
+		<input id="password" class="form-control" name="password" type="password" placeholder="password" required>
+		<!-- <label class="checkbox"> <input type="checkbox" value="agreement">I agree to the fact that I am gay </label> -->
+		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button> </br>
+	</form>	
+	</div>
+</body>
+</html>
