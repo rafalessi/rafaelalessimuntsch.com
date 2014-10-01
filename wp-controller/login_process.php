@@ -15,7 +15,7 @@ rafalessi87@gmail.com
 // Configuracoes banco de dados
 $dbhost = 'mysql.rafaelalessimuntsch.com';
 $dbusername='rafmun1_root';
-$dbpassword='nintendo64';
+$dbpassword='ArticMonkeys!';
 $dbdatabase='rafmun1_users';
 
 /*

@@ -17,6 +17,9 @@
 	<!-- Javascript -->
 	<script src="http://code.jquery.com/jquery-latest.js"></script> <!-- Adicionar biblioteca Jquery -->
 	<script>
+	 	$(document).ajaxStart(function(){ // Implementar alguma funcao para espera
+		 	$("#titlename").text("Loading"); }); // apenas teste. Caso login falhe ele continua com essa mensagem. Talvez nao seja a melhor implementacao para logo de indicacao..
+		 	
 		$(document).ready( function() {  // Funcao para esperar a pagina carregar todos os elementos HTML http://api.jquery.com/ready/
 		$("#login").submit( function () { // Funcao para substituir onsubmit no campo form do HTML. "#" procura elemento com o nome referido  
 			$.ajax( {// chamada ajax via jquery http://api.jquery.com/jquery.ajax/. Para POST pode substituir por $.post()
@@ -29,11 +32,11 @@
 					success: function(json_data) { // estado 4 (readyState) recebido. "data" sao os dados recebidos do pedido
 							var result = $.parseJSON(json_data); // decode JSON
 							if (result.status ==true) 
-								window.location = "quote.html"; // teste se pedido deu certo
+								window.location = "quote.html"; // teste se pedido deu certo, depois mudar para apenas trocar o nome da pagina com algo como Bem vindo ......
 						
 							else {
-								$("#title").css("color", "red"); 
-								$("#title").text("Usuario ou Senha errado. Tente Novamente!");
+								$("#titlename").css("color", "red"); 
+								$("#titlename").text("Usuario ou Senha errado. Tente Novamente!");
 								$("#favicon").attr("href","wp-images/favicon_error.ico");
 							}
 								
@@ -58,7 +61,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Site Pessoal do Rafael Alessi Muntsch</a>
+          <a id="titlename" class="navbar-brand" href="#">Site Pessoal do Rafael Alessi Muntsch</a>
         </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form" id="login">
@@ -68,7 +71,7 @@
             <div class="form-group">
               <input id="password" type="password" placeholder="password" class="form-control">
             </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
+            <button id="signin_button" type="submit" class="btn btn-primary" background-color:red >Sign in</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
